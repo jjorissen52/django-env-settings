@@ -1,0 +1,4 @@
+env_variables:
+  # these are all parsed as strings
+  {% for key, value in parameters.items %}{{ key|safe }}: {{ value|safe }}
+  {% endfor %}
