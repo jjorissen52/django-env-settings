@@ -175,10 +175,9 @@ class Command(BaseCommand):
         if options.get('y', False):
             should_write = True
         else:
-            # confirm = input("Are you sure you want to generate settings.py in the project root?"
-            #                 " This will override any existing version of that file. [y/N] ")
-            # should_write = confirm.lower() in ('y', 'yes')
-            should_write = False
+            confirm = input("Are you sure you want to generate settings.py in the project root?"
+                            " This will override any existing version of that file. [y/N] ")
+            should_write = confirm.lower() in ('y', 'yes')
 
         gae = options.get('gae', False)
         postgres = gae if gae else options.get("postgres", False)
