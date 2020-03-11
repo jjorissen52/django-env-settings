@@ -14,6 +14,14 @@ def string_to_bool(param):
         return param
 
 
+def quoted_string(param):
+    if isinstance(param, bool):
+        return '"1"' if param else '"0"'
+    if isinstance(param, (int, float, str)):
+        return f'"{str(param)}"'
+    return param
+
+
 def string_to_list(param): return param if not isinstance(param, str) else [_.strip() for _ in param.split(',')]
 
 

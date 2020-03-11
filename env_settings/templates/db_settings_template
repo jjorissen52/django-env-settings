@@ -1,0 +1,28 @@
+{% if postgres %}
+if ENV.USE_SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASE_HOST = {% if gae %}f'/cloudsql/{ENV.DATABASE_HOST}' if os.getenv("GAE_APPLICATION", False) else ENV.DATABASE_HOST{% else %}ENV.DATABASE_HOST{% endif %}
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': ENV.DATABASE_NAME,
+            'USER': ENV.DATABASE_USER,
+            'PASSWORD': ENV.DATABASE_PASSWORD,
+            'HOST': DATABASE_HOST,
+            'PORT': ENV.DATABASE_PORT,
+        }
+    }
+{% else %}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+{% endif %}

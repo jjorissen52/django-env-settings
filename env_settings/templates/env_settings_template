@@ -1,11 +1,11 @@
-# { start } generated using python manage.py populate_settings --load-environment
+{{ start_string }}
 environment_defaults = {
-    {% for setting, value in env.items %}"{{ setting }}": {{ value }},
+    {% for setting, value in env.items %}"{{ setting|safe }}": {{ value|safe }},
     {% endfor %}
 }
 
-ENV = get_runtime_parameters(environment_defaults)
+ENV = utils.get_runtime_parameters(environment_defaults)
 
-{% for setting in env.keys %}{{ setting }} = ENV.{{ setting }},
+{% for setting in env.keys %}{{ setting|safe }} = ENV.{{ setting|safe }},
 {% endfor %}
-# { end }
+{{ end_string }}
