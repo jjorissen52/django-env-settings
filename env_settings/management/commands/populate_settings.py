@@ -12,6 +12,7 @@ env_settings_dict = {}
 basic_settings = {
     "DEBUG": "1",
     "SECRET_KEY": 'very-secret',
+    "INITIAL_ADMIN_USERNAME": "admin",
     "INITIAL_ADMIN_EMAIL": "example@email.com",
     "INITIAL_ADMIN_PASSWORD": "password123",
     "ALLOWED_HOSTS": ["*"],
