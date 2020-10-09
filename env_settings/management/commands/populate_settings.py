@@ -1,5 +1,7 @@
 import os
 import sys
+from pathlib import Path
+
 from env_settings import utils
 
 from django.core.management import BaseCommand
@@ -171,7 +173,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         settings_file = options.get("settings-file", None)
         if not settings_file:
-            settings_file = os.path.join(settings.BASE_DIR, settings.BASE_DIR.split("/")[-1], "settings.py")
+
+            base_dir = settings.BASE_DIR if isinstance(settings.BASE_DIR, Path) else Path(settings.BASE_DIR)
+            base_app_dir = os.path.basename(settings.BASE_DIR)
+
+            settings_file = base_dir / base_app_dir / 'settings.py'
 
         if options.get('y', False):
             should_write = True
