@@ -6,6 +6,6 @@ environment_defaults = {
 
 ENV = utils.get_runtime_parameters(environment_defaults)
 
-{% for setting in env.keys %}{{ setting|safe }} = ENV.{{ setting|safe }},
+{% for setting in env.keys %}{{ setting|safe }} = ENV.{{ setting|safe }}
 {% endfor %}
 {{ end_string }}
